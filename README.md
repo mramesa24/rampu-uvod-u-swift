@@ -15,15 +15,21 @@ let pi = 3.14
 var ime = "Ivan"
 ime = "Luka"
 
-print(pi)   // Ispisuje: 3.14
-print(ime)  // Ispisuje: Luka
+print(pi)
+print(ime)
 ```
 
-Konstanta ili varijabla mora dobiti vrijednost prije nego što je pokušamo koristiti. Swift može automatski zaključiti tip podatka iz dodijeljene vrijednosti.
+Ispis
+```
+3.14
+Luka
+```
+
+Konstanta ili varijabla mora dobiti vrijednost prije nego što je pokušamo koristiti.
 
 ## Tipovi podataka
 
-Swift je **strogo tipiziran jezik**: svaka varijabla ili konstanta ima određen tip. Tip se može navesti izravno ili ga Swift može zaključiti (*type inference*).
+Swift je strogo tipiziran jezik, svaka konstanta ili varijabla se definra s statičkim tipom podataka koji pohranjuje. Tip se može navesti izravno ili ga Swift može zaključiti (*type inference*).
 
 ```swift
 // Swift zaključuje da je broj cijeli broj tipa Int.
@@ -35,7 +41,7 @@ let cijena: Double = 12.50
 // Ostali česti jednostavni tipovi.
 let aktivan: Bool = true
 let slovo: Character = "A"
-let poruka: String = "Bok!"
+let ime: String = "Ivan"
 let temperatura: Float = 21.5
 ```
 
@@ -46,8 +52,6 @@ let temperatura: Float = 21.5
 - **Kolekcije i grupiranje podataka:** tuple (n-torka), `Array`, `Dictionary`, a često i `Set`
 
 ## Operatori
-
-Operatori omogućuju izvođenje izračuna, usporedbi i logičkih operacija.
 
 ```swift
 let a = 10
@@ -77,6 +81,29 @@ print(!(a > b))       // false — negacija uvjeta
 var rezultat = 0
 rezultat = a + b
 print(rezultat) // 13
+```
+
+Ispis
+
+```
+13
+7
+30
+3
+1
+
+false
+true
+true
+false
+true
+false
+
+true
+true
+false
+
+13
 ```
 
 ## Kolekcije
