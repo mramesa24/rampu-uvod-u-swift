@@ -529,20 +529,20 @@ class Automobil {
     var velicinaKotaca: Kotaci
     var bojaVrata: Vrata
 
-    init(snagaMotora: Motor, velicinaKotaca: Kotaci, bojaVrata: Vrata {
+    init(snagaMotora: Motor, velicinaKotaca: Kotaci, bojaVrata: Vrata) {
         self.snagaMotora = snagaMotora
         self.velicinaKotaca = velicinaKotaca
         self.bojaVrata = bojaVrata
     }
 
     func statistika(){
-        print("Snaga: \(snagaMotora)")
-        print("Velicina kotaca \(velicinaKotaca)")
-        print("Boja vrata \(bojaVrata)")
+        print("Snaga: \(snagaMotora.snaga)")
+        print("Velicina kotaca \(velicinaKotaca.velicina)")
+        print("Boja vrata \(bojaVrata.boja)")
     }
 }
 
-let automobil: Automobil() = Automobil(
+let automobil: Automobil = Automobil(
     snagaMotora: Motor(snaga: 100),
     velicinaKotaca: Kotaci(velicina: 30),
     bojaVrata: Vrata(boja: "Plava")
