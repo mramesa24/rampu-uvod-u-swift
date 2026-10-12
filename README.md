@@ -58,29 +58,29 @@ let a = 10
 let b = 3
 
 // Aritmetički operatori.
-print(a + b)  // 13 — zbrajanje
-print(a - b)  // 7  — oduzimanje
-print(a * b)  // 30 — množenje
-print(a / b)  // 3  — dijeljenje cijelih brojeva
-print(a % b)  // 1  — ostatak pri dijeljenju
+print(a + b)  // zbrajanje
+print(a - b)  // oduzimanje
+print(a * b)  // množenje
+print(a / b)  // dijeljenje cijelih brojeva
+print(a % b)  // ostatak pri dijeljenju
 
 // Operatori usporedbe vraćaju Bool (true ili false).
-print(a == b) // false — jednako
-print(a != b) // true  — različito
-print(a > b)  // true
-print(a < b)  // false
-print(a >= b) // true
-print(a <= b) // false
+print(a == b) // jednako
+print(a != b) // različito
+print(a > b)
+print(a < b)
+print(a >= b)
+print(a <= b)
 
 // Logički operatori kombiniraju uvjete.
-print(a > 5 && b < 5) // true — oba uvjeta moraju biti istinita
-print(a < 5 || b < 5) // true — dovoljan je jedan istinit uvjet
-print(!(a > b))       // false — negacija uvjeta
+print(a > 5 && b < 5) // oba uvjeta moraju biti istinita
+print(a < 5 || b < 5) // dovoljan je jedan istinit uvjet
+print(!(a > b))       // negacija uvjeta
 
 // Operator pridruživanja sprema vrijednost u varijablu.
 var rezultat = 0
 rezultat = a + b
-print(rezultat) // 13
+print(rezultat)
 ```
 
 Ispis
@@ -108,55 +108,77 @@ false
 
 ## Kolekcije
 
-Kolekcije omogućuju grupiranje više vrijednosti.
+Kolekcije omogućuju Pohranjivanje i imenovanje složenijih informacijama.
 
 ### N-torke (*tuples*)
 
-N-torka grupira više vrijednosti koje ne moraju biti istog tipa. Broj i raspored njezinih elemenata fiksni su.
+N-torka je kolekcija fiksne velicine sa najmanje 2 informacije
+Ako informacije u n-torki nisu imenovane pozivaju se sa 0,1,2,3,...
 
 ```swift
 // N-torka s imenovanim elementima.
-let kartica = (boja: "Crvena", znak: "Srce", vrijednost: 7)
+let card = (color: "Red", suit: "Heart", value: 7)
 
 // Pristup imenovanom elementu.
-print(kartica.boja)       // Crvena
-print(kartica.vrijednost) // 7
+print(card.color)
+print(card.value)
 
-// Elementima neimenovane n-torke pristupa se indeksima od 0.
-let koordinata = (10, 20)
-print(koordinata.0) // 10
-print(koordinata.1) // 20
+// Neimenovana N-torka.
+let brojevi = (10, 20)
 
-// Vrijednosti iz n-torke možemo raspakirati u zasebne konstante.
-let (x, y) = koordinata
-print(x) // 10
-print(y) // 20
+// Pristup neimenovanim elementima pomoću indeksa
+print(brojevi.0)
+print(brojevi.1)
+
+// Vrijednosti iz n-torke možemo spremiti u konstante
+let (prvi, drugi) = brojevi
+print(prvi)
+print(drugi)
+```
+
+Ispis
+```
+Red
+7
+
+10
+20
+
+10
+20
 ```
 
 ### Nizovi (*Array*)
 
-Niz pohranjuje više vrijednosti istog tipa. Može biti prazan, a elementi se dohvaćaju indeksima.
+Niz pohranjuje više vrijednosti istog tipa promjenjive dužine. Može biti prazan
 
 ```swift
 // Niz imena tipa String.
-var imena = ["Ivan", "Karlo", "Marko"]
+var names = ["Ivan", "Karlo", "Marko"]
 
 // Dodavanje jednog elementa na kraj niza.
-imena.append("Lovro")
+names.append("Lovro")
 
 // Možemo dodati i drugi niz elemenata.
-imena += ["Ana", "Mia"]
+names += ["Ana", "Mia"]
 
 // Indeksi počinju od 0: indeks 3 označava četvrti element.
-print(imena[3]) // Lovro
+print(names[3])
 
 // Broj elemenata u nizu.
-print(imena.count) // 6
+print(names.count)
 ```
+
+Ispis
+```
+Lovro
+6
+```
+
 
 ### Rječnici (*Dictionary*)
 
-Rječnik pohranjuje parove **ključ–vrijednost**. Ključ služi za pronalaženje pripadajuće vrijednosti.
+Rječnik pohranjuje parove ključ–vrijednost. Ključ služi za pronalaženje pripadajuće vrijednosti.
 
 ```swift
 // Ime osobe je ključ, a dob je vrijednost.
@@ -167,6 +189,8 @@ var godine = [
 ]
 
 // Dohvaćanje vrijednosti preko ključa.
+print(godine["Luka"])
+
 // Rezultat je Optional jer ključ možda ne postoji.
 print(godine["Marko"] ?? 0) // 23
 
@@ -174,121 +198,165 @@ print(godine["Marko"] ?? 0) // 23
 godine["Ivan"] = 21
 godine["Marko"] = 24
 
-print(godine["Ivan"] ?? 0)  // 21
-print(godine["Marko"] ?? 0) // 24
+print(godine["Ivan"] ?? 0)
+print(godine["Marko"] ?? 0)
+```
+
+Ispis
+```
+Optional(25)
+
+23
+
+21
+24
 ```
 
 ## Optionals — opcionalne vrijednosti
 
-Opcionalni tip (`Optional`) može sadržavati vrijednost određenog tipa ili `nil`, što znači da vrijednost trenutačno nije određena
+Opcionalni tip podataka omogućuje da se pohranjuje nul vrjednost (nil)
 
 ```swift
-// String? znači da varijabla može sadržavati String ili nil.
+// <tip>? znači da varijabla može sadržavati String ili nil.
 var moguciString: String? = nil
 
 // Opcionalni tipovi mogu se koristiti i s nizovima i cijelim brojevima.
 var moguciNiz: [Int]? = nil
 var moguciBroj: Int? = 10
 
-// Ispis opcionalne vrijednosti prikazuje i da je riječ o Optional tipu.
-print(moguciBroj) // Optional(10)
+print(moguciBroj)
 ```
 
-### Opcionalno povezivanje (*optional binding*)
+Ispis
+```
+Optional(10)
+```
+
+
+### Opcionalno povezivanje
 
 ```swift
-var ime: String? = "Ivan"
+var name: String? = "Ivan"
 
-if let odmotanoIme = ime {
-    // Ovaj se blok izvršava samo ako ime sadrži vrijednost.
-    print(odmotanoIme) // Ivan
+if let unwrappedName = name {
+    print(unwrappedName)
 } else {
-    // Ovaj se blok izvršava ako je ime nil.
     print("Vrijednost ne postoji")
 }
 ```
 
-### Operator `??` — zadana vrijednost
+Ispis
+```
+Ivan
+```
+
+### Operator `??`
 
 ```swift
-let nadimak: String? = nil
+let clan: String? = nil
 
-// Ako nadimak sadrži vrijednost, koristi se ona.
+// Ako clan sadrži vrijednost, koristi se ona.
 // Ako je nil, koristi se tekst "Gost".
-let prikaznoIme = nadimak ?? "Gost"
+let imeClana = clan ?? "Gost"
 
-print(prikaznoIme) // Gost
+print(imeClana)
+```
+
+Ispis
+```
+Gost
 ```
 
 ### Prisilno odmotavanje (`!`)
 
 ```swift
-var moguciBroj: Int? = 10
+var possibleInt: Int? = 10
 
-// Prisilno odmotavamo vrijednost i množimo je s 2.
-moguciBroj! *= 2
+possibleInt! *= 2
 
-print(moguciBroj!) // 20
+print(possibleInt!)
+```
+
+Ispis
+```
+20
 ```
 
 ## Strukture i enumeracije
 
 ### Strukture (`struct`)
 
+Strukture su najosnovniji načingrupiranja različitih podataka
+
 ```swift
 struct Student {
-    // Svojstva koja opisuju studenta.
     var ime: String
     var prezime: String
 }
 
-// Stvaranje instance strukture i dodjela vrijednosti svojstvima.
 let najboljiStudent = Student(ime: "Marko", prezime: "Marić")
 
-print(najboljiStudent.ime)     // Marko
-print(najboljiStudent.prezime) // Marić
+print(najboljiStudent.ime)
+print(najboljiStudent.prezime)
+```
+
+Ispis
+```
+Marko
+Marić
 ```
 
 ### Enumeracije (`enum`)
 
+Enumeracije su skupine povezanih vrjednosti za neku vrjednost
+
 ```swift
-enum OsnovnaBoja {
-    case crvena
-    case zelena
-    case plava
+enum osnovneBoje {
+    case Crvena
+    case Zelena
+    case Plava
 }
 
-// Odabir jedne od mogućnosti enumeracije.
-var boja = OsnovnaBoja.crvena
+var boja = osnovneBoje.Crvena
+print(boja)
 
 // Ako Swift može zaključiti tip, naziv tipa može se izostaviti.
 boja = .plava
 
-print(boja) // plava
+print(boja)
+```
+
+Ispis
+```
+Crvena
+Plava
 ```
 
 ## Uvjetni iskazi
 
 ```swift
-var temperatura = 25
+var temperatura = 30
 
-// Oba uvjeta moraju biti istinita da bi se izvršio prvi blok.
 if temperatura > 10 && temperatura < 30 {
     print("Vani je ugodnih \(temperatura) stupnjeva")
 } else {
-    // Izvršava se ako barem jedan od uvjeta nije istinit.
     print("Vani nije ugodno")
 }
 ```
 
+Ispis
+```
+Vani nije ugodno
+```
+
+
 ## Petlje
 
-### `for-in`
+### `for`
 
 ```swift
 let brojevi = [1, 2, 3, 4, 5]
 
-// U svakom prolazu varijabla broj poprima sljedeći element niza.
 for broj in brojevi {
     print(broj)
 }
@@ -299,21 +367,16 @@ for broj in brojevi {
 ```swift
 var broj = 5
 
-// Petlja se ponavlja dok je uvjet broj > 0 istinit.
 while broj > 0 {
     broj -= 1 // Smanjujemo broj za 1.
     print(broj)
 }
-
-// Ispis: 4, 3, 2, 1, 0
 ```
 
 ## Prekidači (`switch`)
 
-`switch` uspoređuje vrijednost s više mogućih slučajeva i izvršava odgovarajući blok.
-
 ```swift
-let vrijednost = 2
+var broj = 1
 
 switch vrijednost {
 case 1:
@@ -321,14 +384,13 @@ case 1:
 case 2:
     print("Dva")
 default:
-    // Izvršava se ako nijedan prethodni slučaj ne odgovara.
     print("Nepoznat")
 }
 ```
 
 ## Funkcije
 
-Funkcija je imenovana cjelina koda koju možemo pozvati više puta. Može primati parametre i vraćati rezultat, ali ne mora raditi ni jedno ni drugo.
+Linearna kolekcija koda koja se može pokretati više puta kada se poziva imenom
 
 ```swift
 // Funkcija prima parametar ime tipa String i vraća String.
@@ -336,76 +398,50 @@ func pozdrav(ime: String) -> String {
     return "Zdravo \(ime)"
 }
 
-// Poziv funkcije i spremanje rezultata.
 let poruka = pozdrav(ime: "Ivan")
 
-print(poruka) // Zdravo Ivan
+print(poruka)
 ```
 
-- `func` označava početak definicije funkcije.
-- `ime: String` definira parametar i njegov tip.
-- `-> String` označava da funkcija vraća vrijednost tipa `String`.
-- `return` vraća rezultat pozivatelju funkcije.
+Ispis
+```
+Zdravo Ivan
+```
 
 ## Klase i objekti
 
-Klasa je predložak za stvaranje objekata. Može sadržavati svojstva (podatke) i metode (funkcije povezane s objektom). Za razliku od struktura, klase su **referentni tipovi**.
+Klasa je predložak za stvaranje objekata. Može sadržavati svojstva (podatke) i metode (funkcije povezane s objektom). Za razliku od struktura, klase su referentni tipovi.
 
 ```swift
 class Osoba {
-    // Svojstvo koje opisuje osobu.
     var ime: String
 
-    // Inicijalizator se poziva pri stvaranju objekta.
+    // Inicijalizator/Konstruktor se poziva pri stvaranju objekta.
     init(ime: String) {
         self.ime = ime
     }
 
-    // Metoda koja koristi svojstvo objekta.
     func predstaviSe() {
         print("Ja sam \(ime)")
     }
 }
 
-// Stvaramo objekt klase Osoba i predajemo ime inicijalizatoru.
 let osoba = Osoba(ime: "Ivan")
 
-// Pozivamo metodu objekta.
-osoba.predstaviSe() // Ja sam Ivan
+osoba.predstaviSe()
 ```
 
-`self.ime` označava svojstvo objekta, dok `ime` s desne strane označava parametar inicijalizatora. Inicijalizator (`init`) služi za pripremu novog objekta s početnim vrijednostima.
+Ispis
+```
+Ja sam Ivan
+```
 
 ## Kontrola pristupa
 
 Kontrola pristupa određuje gdje se svojstvima, metodama i drugim deklaracijama može pristupiti.
-
-- `public` — dostupno izvan modula, ali se javne klase i članovi ne mogu slobodno nadjačavati izvan modula kao `open`.
-- `internal` — zadana razina; dostupno unutar mjesta gdje je definiran
-- `private` — dostupno unutar pripadajućeg ograničenog područja deklaracije, uključujući odgovarajuće ekstenzije tog tipa u istoj datoteci.
-
-```swift
-class Racun {
-    // Dostupno samo unutar klase Racun i dopuštenih povezanih područja.
-    private var stanje: Double = 0
-
-    // Javna metoda omogućuje sigurno mijenjanje stanja računa.
-    func uplati(_ iznos: Double) {
-        if iznos > 0 {
-            stanje += iznos
-        }
-    }
-
-    // Metoda omogućuje čitanje stanja bez izravnog pristupa privatnom svojstvu.
-    func prikaziStanje() {
-        print(stanje)
-    }
-}
-
-let racun = Racun()
-racun.uplati(50)
-racun.prikaziStanje() // 50
-```
+- public: Moze mu pristupiti svkai kod koji uveze modul
+- private: Dostupan samo unutar podrucja deklaracije
+- internal: Samo isti modul ili aplikacija
 
 ## Nasljeđivanje
 
@@ -424,21 +460,26 @@ class Osoba {
 
 // Student nasljeđuje svojstvo ime i metodu predstaviSe iz klase Osoba.
 class Student: Osoba {
-    // Nadjačavamo metodu iz nadklase.
+    // Nadjačavamo metodu iz Osoba klase
     override func predstaviSe() {
         print("Ja sam student \(ime)")
     }
 }
 
 let student = Student(ime: "Ivan")
-student.predstaviSe() // Ja sam student Ivan
+student.predstaviSe()
+```
+
+Ispis
+```
+Ja sam student Ivan
 ```
 
 ## Agregacija i kompozicija
 
 ### Agregacija
 
-Kod agregacije jedan objekt koristi ili grupira druge objekte, ali oni mogu postojati neovisno o njemu.
+Svojstvo agregacije ima objekt koji koristi druge objekte, ali ti objekti mogu postojati neovisno o njemu
 
 ```swift
 class Student {
@@ -455,13 +496,17 @@ class Fakultet {
     var studenti: [Student] = []
 }
 
-let ana = Student(ime: "Ana")
+var noviStudent = Student(ime: "Ana")
 let fakultet = Fakultet()
 
-// Postojeći objekt studenta dodajemo u kolekciju fakulteta.
 fakultet.studenti.append(ana)
 
-print(fakultet.studenti[0].ime) // Ana
+print(fakultet.studenti[0].ime)
+```
+
+Ispis
+```
+Ana
 ```
 
 ### Kompozicija
@@ -479,21 +524,36 @@ struct Vrata {
     var boja: String
 }
 
-struct Automobil {
-    // Automobil sadrži svoje dijelove kao svojstva.
-    var motor: Motor
-    var kotaci: Kotaci
-    var vrata: Vrata
+class Automobil {
+    var snagaMotora: Motor
+    var velicinaKotaca: Kotaci
+    var bojaVrata: Vrata
+
+    init(snagaMotora: Motor, velicinaKotaca: Kotaci, bojaVrata: Vrata {
+        self.snagaMotora = snagaMotora
+        self.velicinaKotaca = velicinaKotaca
+        self.bojaVrata = bojaVrata
+    }
+
+    func statistika(){
+        print("Snaga: \(snagaMotora)")
+        print("Velicina kotaca \(velicinaKotaca)")
+        print("Boja vrata \(bojaVrata)")
+    }
 }
 
-// Pri stvaranju automobila stvaramo i vrijednosti njegovih dijelova.
-let automobil = Automobil(
-    motor: Motor(snaga: 100),
-    kotaci: Kotaci(velicina: 30),
-    vrata: Vrata(boja: "Plava")
+let automobil: Automobil() = Automobil(
+    snagaMotora: Motor(snaga: 100),
+    velicinaKotaca: Kotaci(velicina: 30),
+    bojaVrata: Vrata(boja: "Plava")
 )
 
-print(automobil.motor.snaga) // 100
-print(automobil.kotaci.velicina) // 30
-print(automobil.vrata.boja) // Plava
+automobil.statistika()
+```
+
+Ispis
+```
+Snaga 100
+Velicina kotaca 30
+Boja vrata Plava
 ```
