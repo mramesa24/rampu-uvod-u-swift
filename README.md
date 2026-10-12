@@ -557,3 +557,28 @@ Snaga 100
 Velicina kotaca 30
 Boja vrata Plava
 ```
+
+## Protokoli
+
+Protokol je uvjet koji tip može imati zbog kojeg se obavezuje da će pružiti određeno sučelje drugim komponentama.
+
+```
+protocol predstavljanje {
+    func predstaviSe()
+}
+
+class Student: predstavljanje{
+    // Ako Student ne sadržava metodu "predstaviSe" program se nece kompajlirati
+    func predstaviSe() {
+        print("Pozdrav moje ime je Ivan")
+    }
+}
+
+var Ivan: Student() = Student()
+Ivan.predstaviSe()
+```
+
+Ispis
+```
+Pozdrav moje ime je Ivan
+```
