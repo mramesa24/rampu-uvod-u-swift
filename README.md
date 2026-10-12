@@ -496,17 +496,17 @@ class Fakultet {
     var studenti: [Student] = []
 }
 
-var noviStudent = Student(ime: "Ana")
+var noviStudent = Student(ime: "Ivan")
 let fakultet = Fakultet()
 
-fakultet.studenti.append(ana)
+fakultet.studenti.append(noviStudent)
 
 print(fakultet.studenti[0].ime)
 ```
 
 Ispis
 ```
-Ana
+Ivan
 ```
 
 ### Kompozicija
