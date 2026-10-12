@@ -321,7 +321,7 @@ var boja = osnovneBoje.Crvena
 print(boja)
 
 // Ako Swift može zaključiti tip, naziv tipa može se izostaviti.
-boja = .plava
+boja = .Plava
 
 print(boja)
 ```
