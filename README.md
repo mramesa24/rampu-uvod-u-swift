@@ -378,7 +378,7 @@ while broj > 0 {
 ```swift
 var broj = 1
 
-switch vrijednost {
+switch broj {
 case 1:
     print("Jedan")
 case 2:
