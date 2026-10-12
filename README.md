@@ -23,7 +23,7 @@ Konstanta ili varijabla mora dobiti vrijednost prije nego što je pokušamo kori
 
 ## Tipovi podataka
 
-Swift je **strogo i statički tipiziran jezik**: svaka varijabla ili konstanta ima određen tip. Tip se može navesti izravno ili ga Swift može zaključiti (*type inference*).
+Swift je **strogo tipiziran jezik**: svaka varijabla ili konstanta ima određen tip. Tip se može navesti izravno ili ga Swift može zaključiti (*type inference*).
 
 ```swift
 // Swift zaključuje da je broj cijeli broj tipa Int.
@@ -44,8 +44,6 @@ let temperatura: Float = 21.5
 - **Jednostavni:** `Int`, `Double`, `Float`, `Bool`, `String`, `Character`
 - **Složeni:** `Optional`, `struct`, `class`, `enum`
 - **Kolekcije i grupiranje podataka:** tuple (n-torka), `Array`, `Dictionary`, a često i `Set`
-
-> Napomena: tuple nije isto što i `Array`. N-torka grupira fiksan broj vrijednosti, dok niz može sadržavati promjenjiv broj elemenata istog tipa.
 
 ## Operatori
 
@@ -81,8 +79,6 @@ rezultat = a + b
 print(rezultat) // 13
 ```
 
-Kod opcionalnih vrijednosti važni su i operatori `??`, `?` i `!`. Njihova primjena prikazana je u poglavlju o opcionalnim vrijednostima.
-
 ## Kolekcije
 
 Kolekcije omogućuju grupiranje više vrijednosti.
@@ -112,7 +108,7 @@ print(y) // 20
 
 ### Nizovi (*Array*)
 
-Niz pohranjuje više vrijednosti istog tipa. Može biti prazan, a elementi se dohvaćaju indeksima koji počinju od `0`.
+Niz pohranjuje više vrijednosti istog tipa. Može biti prazan, a elementi se dohvaćaju indeksima.
 
 ```swift
 // Niz imena tipa String.
@@ -155,11 +151,9 @@ print(godine["Ivan"] ?? 0)  // 21
 print(godine["Marko"] ?? 0) // 24
 ```
 
-Ako ključ ne postoji, dohvaćanje vraća `nil`. Operator `??` u tom slučaju omogućuje korištenje zadane vrijednosti.
-
 ## Optionals — opcionalne vrijednosti
 
-Opcionalni tip (`Optional`) može sadržavati vrijednost određenog tipa ili `nil`, što znači da vrijednost trenutačno ne postoji.
+Opcionalni tip (`Optional`) može sadržavati vrijednost određenog tipa ili `nil`, što znači da vrijednost trenutačno nije određena
 
 ```swift
 // String? znači da varijabla može sadržavati String ili nil.
@@ -173,11 +167,7 @@ var moguciBroj: Int? = 10
 print(moguciBroj) // Optional(10)
 ```
 
-Opcionalnu vrijednost ne možemo uvijek koristiti kao običnu vrijednost. Najprije moramo sigurno pristupiti vrijednosti koja se u njoj nalazi.
-
 ### Opcionalno povezivanje (*optional binding*)
-
-Pomoću `if let` provjeravamo postoji li vrijednost. Ako postoji, ona je dostupna u privremenoj konstanti unutar bloka `if`.
 
 ```swift
 var ime: String? = "Ivan"
@@ -205,8 +195,6 @@ print(prikaznoIme) // Gost
 
 ### Prisilno odmotavanje (`!`)
 
-Operator `!` iz opcionalne vrijednosti izravno izvlači vrijednost. Koristi se samo kada smo sigurni da vrijednost nije `nil`, jer će u suprotnom program izazvati pogrešku tijekom izvođenja.
-
 ```swift
 var moguciBroj: Int? = 10
 
@@ -216,13 +204,9 @@ moguciBroj! *= 2
 print(moguciBroj!) // 20
 ```
 
-U pravilu prednost dajemo sigurnijem `if let` ili operatoru `??`, osim ako postoji dobar razlog za prisilno odmotavanje.
-
 ## Strukture i enumeracije
 
 ### Strukture (`struct`)
-
-Struktura grupira povezane podatke u jednu cjelinu. Swift za strukture automatski pruža inicijalizator koji prima njihove pohranjene vrijednosti, ako ga sami ne definiramo drugačije.
 
 ```swift
 struct Student {
@@ -239,8 +223,6 @@ print(najboljiStudent.prezime) // Marić
 ```
 
 ### Enumeracije (`enum`)
-
-Enumeracija definira ograničen skup povezanih mogućnosti. Korisna je kada vrijednost može biti jedna od unaprijed određenih opcija.
 
 ```swift
 enum OsnovnaBoja {
@@ -260,8 +242,6 @@ print(boja) // plava
 
 ## Uvjetni iskazi
 
-`if` i `else` omogućuju izvođenje različitog koda ovisno o tome je li uvjet istinit.
-
 ```swift
 var temperatura = 25
 
@@ -274,11 +254,7 @@ if temperatura > 10 && temperatura < 30 {
 }
 ```
 
-Izraz `\(temperatura)` zove se **interpolacija niza**: vrijednost varijable umeće se u tekst.
-
 ## Petlje
-
-Petlje ponavljaju blok koda.
 
 ### `for-in`
 
@@ -305,8 +281,6 @@ while broj > 0 {
 // Ispis: 4, 3, 2, 1, 0
 ```
 
-Pazimo da se uvjet petlje s vremenom promijeni. Ako uvjet nikada ne postane neistinit, petlja se može izvršavati beskonačno.
-
 ## Prekidači (`switch`)
 
 `switch` uspoređuje vrijednost s više mogućih slučajeva i izvršava odgovarajući blok.
@@ -324,8 +298,6 @@ default:
     print("Nepoznat")
 }
 ```
-
-Za razliku od nekih drugih jezika, Swiftovi `switch` iskazi moraju obraditi sve moguće slučajeve. `default` služi kao zadani slučaj kada ostale mogućnosti nisu navedene.
 
 ## Funkcije
 
@@ -381,10 +353,8 @@ osoba.predstaviSe() // Ja sam Ivan
 
 Kontrola pristupa određuje gdje se svojstvima, metodama i drugim deklaracijama može pristupiti.
 
-- `open` — dostupno izvan modula i dopušta nasljeđivanje odnosno nadjačavanje izvan modula, kada je primjenjivo.
 - `public` — dostupno izvan modula, ali se javne klase i članovi ne mogu slobodno nadjačavati izvan modula kao `open`.
-- `internal` — zadana razina; dostupno unutar istog modula.
-- `fileprivate` — dostupno unutar iste izvorne datoteke.
+- `internal` — zadana razina; dostupno unutar mjesta gdje je definiran
 - `private` — dostupno unutar pripadajućeg ograničenog područja deklaracije, uključujući odgovarajuće ekstenzije tog tipa u istoj datoteci.
 
 ```swift
@@ -412,8 +382,6 @@ racun.prikaziStanje() // 50
 
 ## Nasljeđivanje
 
-Nasljeđivanje omogućuje da klasa preuzme dostupna svojstva i metode druge klase. Izvedena klasa može promijeniti ponašanje naslijeđene metode pomoću ključne riječi `override`. Klasa u Swiftu može izravno naslijediti samo jednu nadklasu.
-
 ```swift
 class Osoba {
     var ime: String
@@ -440,8 +408,6 @@ student.predstaviSe() // Ja sam student Ivan
 ```
 
 ## Agregacija i kompozicija
-
-Agregacija i kompozicija opisuju odnose između objekata. Razlika je u tome koliko je životni ciklus jednog objekta vezan uz drugi. Swift nema posebnu ključnu riječ za agregaciju ili kompoziciju; to su koncepti dizajna programa.
 
 ### Agregacija
 
@@ -472,8 +438,6 @@ print(fakultet.studenti[0].ime) // Ana
 ```
 
 ### Kompozicija
-
-Kod kompozicije jedan objekt predstavlja cjelinu sastavljenu od dijelova čije je postojanje, prema modelu programa, vezano uz tu cjelinu. U Swiftu se taj odnos ne nameće automatski samim korištenjem klasa ili struktura; treba ga osmisliti u programu.
 
 ```swift
 struct Motor {
