@@ -574,7 +574,7 @@ class Student: predstavljanje{
     }
 }
 
-var Ivan: Student() = Student()
+var Ivan: Student = Student()
 Ivan.predstaviSe()
 ```
 
